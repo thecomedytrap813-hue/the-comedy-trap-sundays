@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Comedy Trap Sundays | Tampa's Hottest Comedy Night</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --yellow: #FFD600;
+    --red: #E8000D;
+    --gray: #1a1a1a;
+    --mid: #2a2a2a;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–black);
+color: var(–white);
+font-family: ‘Barlow’, sans-serif;
+overflow-x: hidden;
+cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+width: 16px; height: 16px;
+background: var(–yellow);
+border-radius: 50%;
+position: fixed;
+pointer-events: none;
+z-index: 99999;
+transition: transform 0.15s ease, background 0.2s;
+transform: translate(-50%, -50%);
+}
+.cursor.big { transform: translate(-50%, -50%) scale(3); background: rgba(255,214,0,0.3); }
+
+/* NAV */
+nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+display: flex; align-items: center; justify-content: space-between;
+padding: 1.2rem 3rem;
+background: rgba(10,10,10,0.92);
+backdrop-filter: blur(8px);
+border-bottom: 2px solid var(–yellow);
+}
+.nav-logo {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1.6rem;
+color: var(–yellow);
+letter-spacing: 2px;
+text-decoration: none;
+}
+.nav-logo span { color: var(–white); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+color: var(–white);
+text-decoration: none;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 0.9rem;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+transition: color 0.2s;
+}
+.nav-links a:hover { color: var(–yellow); }
+.nav-cta {
+background: var(–yellow);
+color: var(–black) !important;
+padding: 0.5rem 1.2rem;
+clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.nav-cta:hover { background: var(–red); color: var(–white) !important; }
+
+/* HAMBURGER */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 28px; height: 3px; background: var(–yellow); display: block; transition: 0.3s; }
+
+/* HERO */
+#home {
+min-height: 100vh;
+display: flex; align-items: center; justify-content: center;
+position: relative; overflow: hidden;
+background: var(–black);
+padding-top: 80px;
+}
+.hero-bg {
+position: absolute; inset: 0;
+background:
+repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,214,0,0.03) 80px, rgba(255,214,0,0.03) 81px),
+repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,214,0,0.03) 80px, rgba(255,214,0,0.03) 81px);
+}
+.hero-circle {
+position: absolute;
+width: 700px; height: 700px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(232,0,13,0.18) 0%, transparent 70%);
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.08)} }
+
+.hero-content { text-align: center; position: relative; z-index: 2; padding: 2rem; }
+.hero-tag {
+display: inline-block;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 0.85rem;
+letter-spacing: 4px;
+color: var(–yellow);
+text-transform: uppercase;
+margin-bottom: 1.5rem;
+border: 1px solid var(–yellow);
+padding: 0.3rem 1rem;
+clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.hero-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(5rem, 14vw, 13rem);
+line-height: 0.85;
+color: var(–white);
+letter-spacing: -2px;
+}
+.hero-title .highlight { color: var(–yellow); display: block; }
+.hero-title .trap { color: var(–red); }
+.hero-sub {
+font-size: 1.2rem;
+color: rgba(245,240,232,0.6);
+margin: 2rem 0;
+font-style: italic;
+letter-spacing: 1px;
+}
+.hero-sub strong { color: var(–white); font-style: normal; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary {
+background: var(–yellow);
+color: var(–black);
+padding: 1rem 2.5rem;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 1rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+text-decoration: none;
+clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+transition: background 0.2s, transform 0.2s;
+display: inline-block;
+}
+.btn-primary:hover { background: var(–red); color: var(–white); transform: translateY(-2px); }
+
+.btn-secondary {
+background: transparent;
+color: var(–white);
+padding: 1rem 2.5rem;
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 900;
+font-size: 1rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+text-decoration: none;
+border: 2px solid var(–white);
+clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+transition: 0.2s;
+display: inline-block;
+}
+.btn-secondary:hover { border-color: var(–yellow); color: var(–yellow); transform: translateY(-2px); }
+
+.scroll-hint {
+position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+color: rgba(245,240,232,0.4);
+font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+animation: bounce 2s ease-in-out infinite;
+}
+.scroll-hint::after {
+content: ‘’;
+width: 1px; height: 50px;
+background: linear-gradient(to bottom, var(–yellow), transparent);
+}
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* SECTION STYLES */
+section { padding: 6rem 3rem; }
+.section-label {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 0.8rem;
+letter-spacing: 4px;
+color: var(–yellow);
+text-transform: uppercase;
+margin-bottom: 0.75rem;
+}
+.section-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(3rem, 7vw, 6rem);
+line-height: 1;
+margin-bottom: 1.5rem;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* TICKER */
+.ticker {
+background: var(–yellow);
+padding: 0.7rem 0;
+overflow: hidden;
+white-space: nowrap;
+}
+.ticker-inner {
+display: inline-block;
+animation: ticker 20s linear infinite;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1.1rem;
+letter-spacing: 2px;
+color: var(–black);
+}
+.ticker-inner span { margin: 0 2rem; }
+.ticker-inner .dot { color: var(–red); }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* SHOWS */
+#shows { background: var(–gray); }
+.shows-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.show-card {
+background: var(–black);
+border: 1px solid rgba(255,214,0,0.15);
+padding: 2rem;
+position: relative;
+overflow: hidden;
+transition: border-color 0.3s, transform 0.3s;
+}
+.show-card::before {
+content: ‘’;
+position: absolute; top: 0; left: 0;
+width: 4px; height: 100%;
+background: var(–yellow);
+}
+.show-card:hover { border-color: var(–yellow); transform: translateY(-4px); }
+.show-card.featured::before { background: var(–red); }
+.show-badge {
+display: inline-block;
+background: var(–red);
+color: var(–white);
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 0.7rem;
+letter-spacing: 2px;
+padding: 0.2rem 0.6rem;
+text-transform: uppercase;
+margin-bottom: 1rem;
+}
+.show-date {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 3rem;
+color: var(–yellow);
+line-height: 1;
+}
+.show-month { font-family: ‘Barlow Condensed’, sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 3px; color: rgba(245,240,232,0.5); text-transform: uppercase; }
+.show-name { font-family: ‘Barlow Condensed’, sans-serif; font-weight: 900; font-size: 1.6rem; margin: 0.75rem 0 0.25rem; }
+.show-details { color: rgba(245,240,232,0.5); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.show-price { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.8rem; color: var(–yellow); }
+.show-price span { font-family: ‘Barlow’, sans-serif; font-size: 0.85rem; color: rgba(245,240,232,0.5); font-weight: 400; }
+
+/* ABOUT */
+#about { background: var(–black); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+.about-visual {
+position: relative;
+height: 500px;
+}
+.about-box {
+position: absolute;
+background: var(–gray);
+border: 2px solid var(–yellow);
+display: flex; align-items: center; justify-content: center;
+font-family: ‘Bebas Neue’, sans-serif;
+}
+.about-box-1 { width: 75%; height: 75%; top: 0; left: 0; font-size: 8rem; color: var(–yellow); }
+.about-box-2 { width: 55%; height: 50%; bottom: 0; right: 0; background: var(–red); border-color: var(–red); font-size: 1rem; letter-spacing: 3px; color: var(–white); }
+.about-stat { text-align: center; }
+.about-stat-num { font-family: ‘Bebas Neue’, sans-serif; font-size: 4rem; color: var(–yellow); display: block; }
+.about-stat-label { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+.about-text p { color: rgba(245,240,232,0.7); line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.05rem; }
+.about-stats { display: flex; gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,214,0,0.2); }
+
+/* PERFORMERS */
+#performers { background: var(–gray); }
+.performers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.performer-card {
+position: relative; overflow: hidden;
+background: var(–black);
+border: 1px solid rgba(255,214,0,0.1);
+transition: 0.3s;
+}
+.performer-card:hover { border-color: var(–yellow); }
+.performer-card:hover .performer-overlay { opacity: 1; }
+.performer-img {
+width: 100%; aspect-ratio: 3/4;
+background: var(–mid);
+display: flex; align-items: center; justify-content: center;
+font-size: 5rem;
+position: relative;
+}
+.performer-overlay {
+position: absolute; inset: 0;
+background: rgba(255,214,0,0.9);
+display: flex; align-items: center; justify-content: center;
+opacity: 0; transition: 0.3s;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1.2rem;
+color: var(–black);
+letter-spacing: 2px;
+flex-direction: column; gap: 0.5rem;
+}
+.performer-info { padding: 1.2rem; }
+.performer-name { font-family: ‘Barlow Condensed’, sans-serif; font-weight: 900; font-size: 1.3rem; }
+.performer-role { font-size: 0.8rem; color: var(–yellow); letter-spacing: 2px; text-transform: uppercase; }
+
+/* MERCH */
+#merch { background: var(–black); }
+.merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+.merch-card {
+background: var(–gray);
+border: 1px solid rgba(255,214,0,0.1);
+overflow: hidden;
+transition: 0.3s;
+cursor: pointer;
+}
+.merch-card:hover { border-color: var(–yellow); transform: translateY(-5px); }
+.merch-img {
+width: 100%; aspect-ratio: 1;
+background: var(–mid);
+display: flex; align-items: center; justify-content: center;
+font-size: 5rem;
+position: relative;
+overflow: hidden;
+}
+.merch-img::after {
+content: ‘ADD TO CART’;
+position: absolute; inset: 0;
+background: rgba(232,0,13,0.9);
+display: flex; align-items: center; justify-content: center;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1.2rem;
+letter-spacing: 3px;
+color: var(–white);
+opacity: 0;
+transition: 0.3s;
+}
+.merch-card:hover .merch-img::after { opacity: 1; }
+.merch-info { padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; }
+.merch-name { font-family: ‘Barlow Condensed’, sans-serif; font-weight: 700; font-size: 1.1rem; }
+.merch-type { font-size: 0.75rem; color: rgba(245,240,232,0.5); text-transform: uppercase; letter-spacing: 1px; }
+.merch-price { font-family: ‘Bebas Neue’, sans-serif; font-size: 1.5rem; color: var(–yellow); }
+.merch-notice {
+margin-top: 2rem;
+padding: 1rem 1.5rem;
+background: rgba(255,214,0,0.06);
+border-left: 3px solid var(–yellow);
+font-size: 0.9rem;
+color: rgba(245,240,232,0.6);
+font-style: italic;
+}
+
+/* MAILING LIST */
+#mailing-list { background: var(–red); position: relative; overflow: hidden; }
+#mailing-list::before {
+content: ‘JOIN’;
+position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 18rem;
+color: rgba(0,0,0,0.12);
+line-height: 1;
+pointer-events: none;
+}
+.mailing-inner { max-width: 700px; }
+.mailing-inner .section-title { color: var(–white); }
+.mailing-inner p { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7; }
+.mailing-form { display: flex; gap: 0; flex-wrap: wrap; }
+.mailing-form input {
+flex: 1; min-width: 200px;
+background: rgba(255,255,255,0.15);
+border: 2px solid rgba(255,255,255,0.4);
+border-right: none;
+padding: 1rem 1.5rem;
+color: var(–white);
+font-family: ‘Barlow’, sans-serif;
+font-size: 1rem;
+outline: none;
+clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+.mailing-form input::placeholder { color: rgba(255,255,255,0.5); }
+.mailing-form input:focus { background: rgba(255,255,255,0.25); border-color: var(–white); }
+.mailing-form button {
+background: var(–black);
+color: var(–yellow);
+border: 2px solid var(–black);
+padding: 1rem 2rem;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1rem;
+letter-spacing: 2px;
+cursor: pointer;
+clip-path: polygon(0% 0%, calc(100% - 8px) 0%, 100% 100%, 0% 100%);
+transition: 0.2s;
+}
+.mailing-form button:hover { background: var(–yellow); color: var(–black); }
+.mailing-perks { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.mailing-perk { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+.mailing-perk::before { content: ‘✓’; font-weight: 700; color: var(–white); }
+
+/* GALLERY */
+#gallery { background: var(–gray); }
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: repeat(2, 200px);
+gap: 0.75rem;
+margin-top: 3rem;
+}
+.gallery-item {
+background: var(–mid);
+overflow: hidden; position: relative;
+display: flex; align-items: center; justify-content: center;
+font-size: 3rem;
+cursor: pointer;
+}
+.gallery-item:first-child { grid-column: span 2; grid-row: span 2; font-size: 5rem; }
+.gallery-item::after {
+content: ‘⤢’;
+position: absolute; inset: 0;
+background: rgba(255,214,0,0.85);
+display: flex; align-items: center; justify-content: center;
+font-size: 2rem; color: var(–black);
+opacity: 0; transition: 0.3s;
+}
+.gallery-item:hover::after { opacity: 1; }
+.gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(–mid), var(–gray)); }
+
+/* CONTACT */
+#contact { background: var(–black); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+font-size: 0.8rem;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: rgba(245,240,232,0.5);
+}
+.form-group input, .form-group select, .form-group textarea {
+background: var(–gray);
+border: 1px solid rgba(255,214,0,0.2);
+padding: 0.9rem 1rem;
+color: var(–white);
+font-family: ‘Barlow’, sans-serif;
+font-size: 1rem;
+outline: none;
+transition: border-color 0.2s;
+resize: vertical;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(–yellow); }
+.form-group select option { background: var(–gray); }
+.contact-info { display: flex; flex-direction: column; gap: 2rem; }
+.contact-info-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+.contact-icon {
+width: 48px; height: 48px; min-width: 48px;
+background: var(–yellow);
+display: flex; align-items: center; justify-content: center;
+font-size: 1.3rem;
+clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.contact-info-label { font-family: ‘Barlow Condensed’, sans-serif; font-weight: 700; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+.contact-info-value { font-size: 1.05rem; margin-top: 0.2rem; }
+.map-placeholder {
+margin-top: 2rem;
+height: 200px;
+background: var(–gray);
+border: 1px solid rgba(255,214,0,0.2);
+display: flex; align-items: center; justify-content: center;
+color: rgba(245,240,232,0.3);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 1.2rem;
+letter-spacing: 3px;
+}
+
+/* FOOTER */
+footer {
+background: var(–black);
+border-top: 2px solid var(–yellow);
+padding: 3rem;
+text-align: center;
+}
+.footer-logo {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 3rem;
+color: var(–yellow);
+letter-spacing: 3px;
+}
+.footer-logo span { color: var(–white); }
+.footer-tagline { color: rgba(245,240,232,0.4); font-style: italic; margin: 0.5rem 0 2rem; }
+.footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.footer-links a { color: rgba(245,240,232,0.5); text-decoration: none; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: var(–yellow); }
+.footer-social { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+.social-btn {
+width: 44px; height: 44px;
+background: var(–gray);
+border: 1px solid rgba(255,214,0,0.2);
+display: flex; align-items: center; justify-content: center;
+text-decoration: none; color: var(–white); font-size: 1.1rem;
+transition: 0.2s;
+clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+.social-btn:hover { background: var(–yellow); color: var(–black); }
+.footer-copy { color: rgba(245,240,232,0.25); font-size: 0.8rem; }
+
+/* MOBILE NAV */
+.mobile-menu {
+display: none;
+position: fixed; inset: 0; z-index: 999;
+background: var(–black);
+flex-direction: column;
+align-items: center; justify-content: center;
+gap: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 3rem; color: var(–white);
+text-decoration: none; letter-spacing: 3px;
+transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(–yellow); }
+
+/* SUCCESS MESSAGE */
+.success-msg {
+display: none;
+background: rgba(255,214,0,0.1);
+border: 1px solid var(–yellow);
+padding: 1rem;
+color: var(–yellow);
+font-family: ‘Barlow Condensed’, sans-serif;
+font-weight: 700;
+letter-spacing: 1px;
+text-align: center;
+}
+
+/* ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+.fade-in.visible { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+.about-grid { grid-template-columns: 1fr; }
+.about-visual { display: none; }
+.contact-grid { grid-template-columns: 1fr; }
+.gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+.gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+}
+@media (max-width: 700px) {
+nav { padding: 1rem 1.5rem; }
+.nav-links { display: none; }
+.hamburger { display: flex; }
+section { padding: 4rem 1.5rem; }
+.form-row { grid-template-columns: 1fr; }
+.mailing-form input { border-right: 2px solid rgba(255,255,255,0.4); clip-path: none; }
+.mailing-form button { clip-path: none; width: 100%; }
+.about-stats { flex-direction: column; gap: 1rem; }
+footer { padding: 2rem 1.5rem; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+
+<nav>
+  <a href="#home" class="nav-logo">COMEDY<span>TRAP</span></a>
+  <ul class="nav-links">
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#performers">Performers</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#mailing-list">Join List</a></li>
+    <li><a href="#contact" class="nav-cta">Reserve Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#shows" onclick="closeMenu()">Shows</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#performers" onclick="closeMenu()">Performers</a>
+  <a href="#merch" onclick="closeMenu()">Merch</a>
+  <a href="#gallery" onclick="closeMenu()">Gallery</a>
+  <a href="#mailing-list" onclick="closeMenu()">Join List</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-circle"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Tampa's Hottest Comedy Night</div>
+    <h1 class="hero-title">
+      THE <span class="highlight">COMEDY</span><span class="trap">TRAP</span>
+      <span class="highlight" style="font-size:0.5em; letter-spacing:6px; color:rgba(245,240,232,0.6);">SUNDAYS</span>
+    </h1>
+    <p class="hero-sub">Every Sunday Night — <strong>Tampa, FL</strong> — Doors Open 7PM</p>
+    <div class="hero-btns">
+      <a href="#shows" class="btn-primary">Get Tickets</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- TICKER -->
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>COMEDY TRAP SUNDAYS</span><span class="dot">★</span>
+    <span>EVERY SUNDAY NIGHT IN TAMPA</span><span class="dot">★</span>
+    <span>LIVE STAND-UP</span><span class="dot">★</span>
+    <span>LOCAL & NATIONAL ACTS</span><span class="dot">★</span>
+    <span>21+ AFTER 9PM</span><span class="dot">★</span>
+    <span>FULL BAR</span><span class="dot">★</span>
+    <span>COMEDY TRAP SUNDAYS</span><span class="dot">★</span>
+    <span>EVERY SUNDAY NIGHT IN TAMPA</span><span class="dot">★</span>
+    <span>LIVE STAND-UP</span><span class="dot">★</span>
+    <span>LOCAL & NATIONAL ACTS</span><span class="dot">★</span>
+    <span>21+ AFTER 9PM</span><span class="dot">★</span>
+    <span>FULL BAR</span><span class="dot">★</span>
+  </div>
+</div>
+
+<!-- SHOWS -->
+
+<section id="shows">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Upcoming Shows</p>
+      <h2 class="section-title">THIS <span style="color:var(--yellow)">WEEK</span><br>& BEYOND</h2>
+    </div>
+    <div class="shows-grid">
+      <div class="show-card featured fade-in">
+        <div class="show-badge">🔥 Sold Out Risk</div>
+        <div class="show-month">April</div>
+        <div class="show-date">06</div>
+        <div class="show-name">Sunday Night Madness</div>
+        <div class="show-details">Doors 7PM · Show 8PM · 21+ After 9PM</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="show-price">$20 <span>/ General</span></div>
+          <a href="#contact" class="btn-primary" style="padding:0.6rem 1.5rem; font-size:0.85rem;">Get Tickets</a>
+        </div>
+      </div>
+      <div class="show-card fade-in">
+        <div class="show-month">April</div>
+        <div class="show-date">13</div>
+        <div class="show-name">All-Star Showcase</div>
+        <div class="show-details">Doors 7PM · Show 8PM · All Ages Welcome</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="show-price">$25 <span>/ VIP Available</span></div>
+          <a href="#contact" class="btn-primary" style="padding:0.6rem 1.5rem; font-size:0.85rem;">Get Tickets</a>
+        </div>
+      </div>
+      <div class="show-card fade-in">
+        <div class="show-month">April</div>
+        <div class="show-date">20</div>
+        <div class="show-name">420 Comedy Special</div>
+        <div class="show-details">Doors 6PM · Show 7:30PM · 21+</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="show-price">$30 <span>/ Premium Night</span></div>
+          <a href="#contact" class="btn-primary" style="padding:0.6rem 1.5rem; font-size:0.85rem;">Get Tickets</a>
+        </div>
+      </div>
+      <div class="show-card fade-in">
+        <div class="show-month">April</div>
+        <div class="show-date">27</div>
+        <div class="show-name">Open Mic Night</div>
+        <div class="show-details">Doors 7PM · Show 8PM · All Ages</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div class="show-price">$10 <span>/ General</span></div>
+          <a href="#contact" class="btn-primary" style="padding:0.6rem 1.5rem; font-size:0.85rem;">Get Tickets</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual fade-in">
+        <div class="about-box about-box-1">😂</div>
+        <div class="about-box about-box-2">EST. TAMPA 2023</div>
+      </div>
+      <div class="about-text fade-in">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">WHERE SUNDAY<br><span style="color:var(--yellow)">HITS DIFFERENT</span></h2>
+        <p>The Comedy Trap Sundays started with one simple idea: Tampa deserves a comedy night that goes <em>hard</em>. No filler, no fluff — just raw, unfiltered laughs from the best local and touring talent in the game.</p>
+        <p>Every Sunday we transform our stage into the city's most electric comedy experience. From headliners you've seen on Netflix to Tampa's own rising stars, The Trap is where real comedy lives.</p>
+        <p>Come for the laughs. Stay for the vibes. Leave changed forever.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num">200+</span>
+            <span class="about-stat-label">Shows Done</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">50K+</span>
+            <span class="about-stat-label">Fans Served</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">#1</span>
+            <span class="about-stat-label">In Tampa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFORMERS -->
+
+<section id="performers">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">The Lineup</p>
+      <h2 class="section-title">MEET THE<br><span style="color:var(--yellow)">PERFORMERS</span></h2>
+    </div>
+    <div class="performers-grid">
+      <div class="performer-card fade-in">
+        <div class="performer-img">
+          🎤
+          <div class="performer-overlay">
+            <span>NEXT SHOW</span>
+            <span style="font-family:Bebas Neue;font-size:1.8rem;">APR 6</span>
+          </div>
+        </div>
+        <div class="performer-info">
+          <div class="performer-name">Marcus "Big M" Davis</div>
+          <div class="performer-role">Headliner · Tampa Native</div>
+        </div>
+      </div>
+      <div class="performer-card fade-in">
+        <div class="performer-img">
+          🎭
+          <div class="performer-overlay">
+            <span>NEXT SHOW</span>
+            <span style="font-family:Bebas Neue;font-size:1.8rem;">APR 13</span>
+          </div>
+        </div>
+        <div class="performer-info">
+          <div class="performer-name">Keisha Laughs</div>
+          <div class="performer-role">Headliner · Miami, FL</div>
+        </div>
+      </div>
+      <div class="performer-card fade-in">
+        <div class="performer-img">
+          🎯
+          <div class="performer-overlay">
+            <span>NEXT SHOW</span>
+            <span style="font-family:Bebas Neue;font-size:1.8rem;">APR 20</span>
+          </div>
+        </div>
+        <div class="performer-info">
+          <div class="performer-name">DJ Punchline</div>
+          <div class="performer-role">Feature Act · Atlanta, GA</div>
+        </div>
+      </div>
+      <div class="performer-card fade-in">
+        <div class="performer-img">
+          🌟
+          <div class="performer-overlay">
+            <span>NEXT SHOW</span>
+            <span style="font-family:Bebas Neue;font-size:1.8rem;">APR 27</span>
+          </div>
+        </div>
+        <div class="performer-info">
+          <div class="performer-name">Tanya B. Wild</div>
+          <div class="performer-role">Host · Tampa Native</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="#contact" class="btn-secondary">Book a Performer</a>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+
+<section id="merch">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Official Merch</p>
+      <h2 class="section-title">TRAP <span style="color:var(--yellow)">GEAR</span></h2>
+    </div>
+    <div class="merch-grid">
+      <div class="merch-card fade-in">
+        <div class="merch-img">🧢</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Trap Snapback</div>
+            <div class="merch-type">Hat · One Size</div>
+          </div>
+          <div class="merch-price">$35</div>
+        </div>
+      </div>
+      <div class="merch-card fade-in">
+        <div class="merch-img">👕</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Logo Tee</div>
+            <div class="merch-type">T-Shirt · S–3XL</div>
+          </div>
+          <div class="merch-price">$30</div>
+        </div>
+      </div>
+      <div class="merch-card fade-in">
+        <div class="merch-img">🧥</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Trap Hoodie</div>
+            <div class="merch-type">Hoodie · S–3XL</div>
+          </div>
+          <div class="merch-price">$55</div>
+        </div>
+      </div>
+      <div class="merch-card fade-in">
+        <div class="merch-img">🎽</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Sunday Tank</div>
+            <div class="merch-type">Tank Top · S–2XL</div>
+          </div>
+          <div class="merch-price">$25</div>
+        </div>
+      </div>
+      <div class="merch-card fade-in">
+        <div class="merch-img">🧣</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Dad Hat</div>
+            <div class="merch-type">Hat · One Size</div>
+          </div>
+          <div class="merch-price">$28</div>
+        </div>
+      </div>
+      <div class="merch-card fade-in">
+        <div class="merch-img">📦</div>
+        <div class="merch-info">
+          <div>
+            <div class="merch-name">Bundle Pack</div>
+            <div class="merch-type">Hat + Tee + Sticker</div>
+          </div>
+          <div class="merch-price">$55</div>
+        </div>
+      </div>
+    </div>
+    <div class="merch-notice fade-in">
+      📦 Merch is available for pick-up at the venue on show nights, or contact us to arrange shipping. Custom orders and bulk pricing available for groups.
+    </div>
+  </div>
+</section>
+
+<!-- MAILING LIST -->
+
+<section id="mailing-list">
+  <div class="container">
+    <div class="mailing-inner fade-in">
+      <p class="section-label" style="color:rgba(255,255,255,0.7)">Stay In The Loop</p>
+      <h2 class="section-title">JOIN THE<br>TRAP LIST</h2>
+      <p>Be the first to know about upcoming shows, exclusive presales, performer announcements, and subscriber-only discounts. Don't miss a Sunday.</p>
+      <div class="mailing-form">
+        <input type="text" placeholder="Your name" id="mailName">
+        <input type="email" placeholder="Your email address" id="mailEmail">
+        <button onclick="submitMailingList()">LOCK IN</button>
+      </div>
+      <div class="success-msg" id="mailingSuccess">🎤 You're in! Welcome to the Trap List.</div>
+      <div class="mailing-perks">
+        <div class="mailing-perk">Early ticket access</div>
+        <div class="mailing-perk">Exclusive discounts</div>
+        <div class="mailing-perk">Show announcements</div>
+        <div class="mailing-perk">No spam, ever</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">The Vibe</p>
+      <h2 class="section-title">INSIDE THE<br><span style="color:var(--yellow)">TRAP</span></h2>
+    </div>
+    <div class="gallery-grid fade-in">
+      <div class="gallery-item"><div class="gallery-placeholder">🎤</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">😂</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">🎭</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">🥂</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">🌟</div></div>
+    </div>
+    <p style="color:rgba(245,240,232,0.3); font-size:0.85rem; margin-top:1rem; font-style:italic;">📸 Replace placeholder blocks with your actual photos.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">RESERVE &<br><span style="color:var(--yellow)">CONNECT</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form fade-in">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Marcus">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Davis">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(813) 555-0000">
+        </div>
+        <div class="form-group">
+          <label>Inquiry Type</label>
+          <select>
+            <option>Reserve a Table</option>
+            <option>Buy Tickets</option>
+            <option>VIP Package</option>
+            <option>Private Event / Buyout</option>
+            <option>Performer Booking</option>
+            <option>Merch Order</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Party Size</label>
+          <select>
+            <option>Just Me</option>
+            <option>2–4 People</option>
+            <option>5–10 People</option>
+            <option>10+ People</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Tell us what you need..."></textarea>
+        </div>
+        <button class="btn-primary" onclick="submitContact()" style="width:100%; padding:1rem; font-size:1rem;">SEND IT</button>
+        <div class="success-msg" id="contactSuccess">✅ Message received! We'll hit you back within 24 hours.</div>
+      </div>
+      <div class="contact-info fade-in">
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-value">Tampa, Florida<br><span style="color:rgba(245,240,232,0.5); font-size:0.9rem;">Full address available upon reservation</span></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-info-label">Show Time</div>
+            <div class="contact-info-value">Every Sunday<br>Doors 7PM · Show 8PM</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-info-label">Phone</div>
+            <div class="contact-info-value">(813) 555-0000</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value">info@comedytrapsundays.com</div>
+          </div>
+        </div>
+        <div class="map-placeholder">📍 MAP EMBED HERE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">COMEDY<span>TRAP</span> SUNDAYS</div>
+  <div class="footer-tagline">Tampa's Wildest Sunday Night — Every. Single. Week.</div>
+  <div class="footer-social">
+    <a href="#" class="social-btn">📸</a>
+    <a href="#" class="social-btn">🎵</a>
+    <a href="#" class="social-btn">📘</a>
+    <a href="#" class="social-btn">🐦</a>
+    <a href="#" class="social-btn">▶️</a>
+  </div>
+  <div class="footer-links">
+    <a href="#shows">Shows</a>
+    <a href="#about">About</a>
+    <a href="#performers">Performers</a>
+    <a href="#merch">Merch</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#mailing-list">Mailing List</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 The Comedy Trap Sundays · Tampa, FL · All Rights Reserved</div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .merch-card, .show-card, .performer-card, .gallery-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMenu() { mobileMenu.classList.remove('open'); }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function submitMailingList() {
+    const name = document.getElementById('mailName').value;
+    const email = document.getElementById('mailEmail').value;
+    if (!name || !email) { alert('Please fill in your name and email!'); return; }
+    document.getElementById('mailingSuccess').style.display = 'block';
+    document.getElementById('mailName').value = '';
+    document.getElementById('mailEmail').value = '';
+  }
+  function submitContact() {
+    document.getElementById('contactSuccess').style.display = 'block';
+    setTimeout(() => document.getElementById('contactSuccess').style.display = 'none', 5000);
+  }
+</script>
+
+</body>
+</html>
